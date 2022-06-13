@@ -33,10 +33,6 @@ capabilities = cmp_lsp.update_capabilities(capabilities)
 
 local lspconfig = prequire "lspconfig"
 
-lspconfig["clangd"].setup {
-	on_attach = on_attach,
-	capabilities = capabilities,
-}
 lspconfig["hls"].setup {
 	on_attach = on_attach,
 	capabilities = capabilities,
@@ -80,6 +76,15 @@ lspconfig["vimls"].setup {
 -- [[ rust-tools ]]
 local rust_tools = prequire "rust-tools"
 rust_tools.setup {
+	-- Send these options to NeoVim
+	server = {
+		on_attach = on_attach,
+		capabilities = capabilities,
+	},
+}
+
+local clangd_extensions = prequire "clangd_extensions"
+clangd_extensions.setup {
 	-- Send these options to NeoVim
 	server = {
 		on_attach = on_attach,

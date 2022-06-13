@@ -48,6 +48,7 @@ return packer.startup {
 		use "onsails/lspkind-nvim"
 		use "mfussenegger/nvim-jdtls" -- Java JDTLS support
 		use { "simrat39/rust-tools.nvim", requires = "nvim-lua/plenary.nvim" }
+		use { "p00f/clangd_extensions.nvim" }
 
 		-- Debugging
 		use "mfussenegger/nvim-dap"
