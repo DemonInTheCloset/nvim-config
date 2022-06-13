@@ -75,7 +75,58 @@ lspconfig["vimls"].setup {
 	capabilities = capabilities,
 }
 
-return {
-	on_attach = on_attach,
-	capabilities = capabilities,
+-- [[ Language Specific Plugins ]]
+
+-- [[ rust-tools ]]
+local rust_tools = prequire "rust-tools"
+rust_tools.setup {
+	-- Send these options to NeoVim
+	server = {
+		on_attach = on_attach,
+		capabilities = capabilities,
+	},
+}
+
+-- [[ null_ls ]] --
+local lsp_formatting = vim.api.nvim_create_augroup("LspFormatting", {})
+
+local null_ls = prequire "null-ls"
+null_ls.setup {
+	sources = {
+		null_ls.builtins.formatting.black,
+		null_ls.builtins.formatting.clang_format,
+		null_ls.builtins.formatting.google_java_format,
+		null_ls.builtins.formatting.latexindent,
+		null_ls.builtins.formatting.nginx_beautifier,
+		null_ls.builtins.formatting.prettier,
+		null_ls.builtins.formatting.reorder_python_imports.with {
+			extra_args = { "--application-directories=.:src" },
+		},
+		null_ls.builtins.formatting.rustfmt,
+		null_ls.builtins.formatting.shellharden,
+		null_ls.builtins.formatting.shfmt,
+		null_ls.builtins.formatting.stylua,
+		null_ls.builtins.formatting.taplo,
+
+		null_ls.builtins.diagnostics.checkmake,
+		null_ls.builtins.diagnostics.chktex,
+		null_ls.builtins.diagnostics.mypy,
+		null_ls.builtins.diagnostics.shellcheck,
+		null_ls.builtins.diagnostics.trail_space,
+		-- null_ls.builtins.diagnostics.vulture,
+		null_ls.builtins.diagnostics.zsh,
+
+		null_ls.builtins.code_actions.shellcheck,
+	},
+	-- Format On Save
+	on_attach = function(client, bufnr)
+		if client.supports_method "textDocument/formatting" then
+			vim.api.nvim_clear_autocmds { group = lsp_formatting, buffer = bufnr }
+			vim.api.nvim_create_autocmd("BufWritePre", {
+				group = lsp_formatting,
+				buffer = bufnr,
+				callback = vim.lsp.buf.formatting_seq_sync,
+			})
+		end
+	end,
 }
