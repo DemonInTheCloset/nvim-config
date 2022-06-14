@@ -397,11 +397,5 @@ local packer_update = vim.api.nvim_create_augroup("PackerUpdate", {})
 vim.api.nvim_create_autocmd("BufWritePost", {
 	group = packer_update,
 	pattern = "*/plugins.lua",
-	callback = function()
-		-- Set plugins as not loaded
-		package.loaded.plugins = nil
-		prequire "user/plugins"
-		local packer = prequire "packer"
-		packer.compile()
-	end,
+	command = "source <afile> | PackerCompile",
 })
