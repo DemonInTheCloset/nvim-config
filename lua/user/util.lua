@@ -8,6 +8,27 @@ local function prequire(...)
 	return ret
 end
 
+local function merge_tables(table, new_keys)
+	for key, value in pairs(new_keys) do
+		table[key] = value
+	end
+end
+
+local function augroup(name, autocmds)
+	local group = vim.api.nvim_create_augroup(name, {})
+	local g = { group = group }
+
+	for _, value in ipairs(autocmds) do
+		value.opts = value.opts or {}
+		merge_tables(value.opts, g)
+		value = vim.api.nvim_create_autocmd(value.event, value.opts or {})
+	end
+
+	return group
+end
+
 return {
 	prequire = prequire,
+	merge_tables = merge_tables,
+	augroup = augroup,
 }
