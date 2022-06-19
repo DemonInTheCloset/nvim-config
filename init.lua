@@ -296,106 +296,148 @@ statusline.setup {
 }
 
 -- [[ augroups ]] --
-local open_folds = vim.api.nvim_create_augroup("OpenFolds", {})
-vim.api.nvim_create_autocmd(
-	"BufRead",
-	{ group = open_folds, pattern = "*", command = "silent! %foldopen!" }
-)
-
-local file_type_override = vim.api.nvim_create_augroup("FileTypeOverride", {})
-vim.api.nvim_create_autocmd("FileType", {
-	group = file_type_override,
-	pattern = { "c" },
-	-- Set indent width to 8 spaces and use tabs
-	callback = function()
-		vim.bo.tabstop = 8
-		vim.bo.shiftwidth = 8
-		vim.bo.expandtab = false
-	end,
-})
-vim.api.nvim_create_autocmd("FileType", {
-	group = file_type_override,
-	pattern = { "porth", "haskell", "markdown", "java" },
-	-- Set indent width to 2 spaces
-	callback = function()
-		vim.bo.tabstop = 2
-		vim.bo.shiftwidth = 2
-	end,
-})
-vim.api.nvim_create_autocmd("FileType", {
-	group = file_type_override,
-	pattern = { "markdown", "tex" },
-	-- Set wrap at 80 characters
-	callback = function()
-		vim.bo.textwidth = 80
-		vim.wo.wrap = true
-	end,
-})
-vim.api.nvim_create_autocmd("TermOpen", {
-	group = file_type_override,
-	pattern = "*",
-	-- Don't show line numbers
-	callback = function()
-		vim.wo.number = false
-		vim.wo.relativenumber = false
-	end,
+user_util.augroup("OpenFolds", {
+	{
+		event = "BufRead",
+		opts = {
+			pattern = "*",
+			command = "silent! %foldopen!",
+		},
+	},
 })
 
-local dispatch_compiler = vim.api.nvim_create_augroup("DispatchCompiler", {})
-vim.api.nvim_create_autocmd("FileType", {
-	group = dispatch_compiler,
-	pattern = "java",
-	callback = function()
-		vim.b.dispatch = "gradle build"
-	end,
-})
-vim.api.nvim_create_autocmd("FileType", {
-	group = dispatch_compiler,
-	pattern = "python",
-	callback = function()
-		vim.b.dispatch = "mypy %"
-	end,
-})
-vim.api.nvim_create_autocmd("FileType", {
-	group = dispatch_compiler,
-	pattern = "markdown",
-	callback = function()
-		vim.b.dispatch = "pandoc --pdf-engine=xelatex -f markdown % -o %.pdf"
-	end,
-})
-vim.api.nvim_create_autocmd("FileType", {
-	group = dispatch_compiler,
-	pattern = { "tex", "plaintex" },
-	callback = function()
-		vim.b.dispatch = "latexmk -pvc -pdflua %"
-	end,
-})
-vim.api.nvim_create_autocmd("FileType", {
-	group = dispatch_compiler,
-	pattern = { "sh", "bash" },
-	command = ":compiler shellcheck",
-})
-vim.api.nvim_create_autocmd("FileType", {
-	group = dispatch_compiler,
-	pattern = "porth",
-	command = ":compiler porth",
-})
-
-local template_files = vim.api.nvim_create_augroup("TemplateFiles", {})
-vim.api.nvim_create_autocmd("BufNewFile", {
-	group = template_files,
-	pattern = { "*.py", "*.zsh" },
-	callback = function(vals)
-		local extension = vals["match"]:match "[^.]+$"
-		-- Look for a file named skeleton.extension (ie. skeleton.py)
-		-- in ~/.config/nvim/templates/ and read it into the current file
-		vim.cmd("0r ~/.config/nvim/templates/skeleton." .. extension)
-	end,
+user_util.augroup("FTOverride", {
+	{
+		event = "FileType",
+		opts = {
+			pattern = { "c" },
+			-- Set indent width to 8 spaces and use tabs
+			callback = function()
+				vim.bo.tabstop = 8
+				vim.bo.shiftwidth = 8
+				vim.bo.expandtab = false
+			end,
+		},
+	},
+	{
+		event = "FileType",
+		opts = {
+			pattern = { "porth", "haskell", "markdown", "java" },
+			-- Set indent width to 2 spaces
+			callback = function()
+				vim.bo.tabstop = 2
+				vim.bo.shiftwidth = 2
+			end,
+		},
+	},
+	{
+		event = "FileType",
+		opts = {
+			pattern = { "markdown", "tex" },
+			-- Set wrap at 80 characters
+			callback = function()
+				vim.bo.textwidth = 80
+				vim.wo.wrap = true
+			end,
+		},
+	},
+	{
+		event = "TermOpen",
+		opts = {
+			pattern = "*",
+			-- Don't show line numbers
+			callback = function()
+				vim.wo.number = false
+				vim.wo.relativenumber = false
+			end,
+		},
+	},
 })
 
-local packer_update = vim.api.nvim_create_augroup("PackerUpdate", {})
-vim.api.nvim_create_autocmd("BufWritePost", {
-	group = packer_update,
-	pattern = "*/plugins.lua",
-	command = "source <afile> | PackerCompile",
+user_util.augroup("SetDispatch", {
+	{
+		event = "FileType",
+		opts = {
+			pattern = "java",
+			callback = function()
+				vim.b.dispatch = "gradle build"
+			end,
+		},
+	},
+	{
+		event = "FileType",
+		opts = {
+			pattern = "python",
+			callback = function()
+				vim.b.dispatch = "mypy %"
+			end,
+		},
+	},
+	{
+		event = "FileType",
+		opts = {
+			pattern = "markdown",
+			callback = function()
+				vim.b.dispatch = "pandoc --pdf-engine=xelatex -f markdown % -o %.pdf"
+			end,
+		},
+	},
+	{
+		event = "FileType",
+		opts = {
+			pattern = { "tex", "plaintex" },
+			callback = function()
+				vim.b.dispatch = "latexmk -pvc -pdflua %"
+			end,
+		},
+	},
+	{
+		event = "FileType",
+		opts = {
+			pattern = { "sh", "bash" },
+			command = ":compiler shellcheck",
+		},
+	},
+	{
+		event = "FileType",
+		opts = {
+			pattern = "porth",
+			command = ":compiler porth",
+		},
+	},
+})
+
+user_util.augroup("HighlightOnYank", {
+	{
+		event = "TextYankPost",
+		opts = {
+			pattern = "*",
+			callback = vim.highlight.on_yank,
+		},
+	},
+})
+
+user_util.augroup("TemplateFiles", {
+	{
+		event = "BufNewFile",
+		opts = {
+			pattern = { "*.py", "*.zsh" },
+			callback = function(vals)
+				local extension = vals["match"]:match "[^.]+$"
+				-- Look for a file named skeleton.extension (ie. skeleton.py)
+				-- in ~/.config/nvim/templates/ and read it into the current file
+				vim.cmd("0r ~/.config/nvim/templates/skeleton." .. extension)
+			end,
+		},
+	},
+})
+
+user_util.augroup("PackerUpdate", {
+	{
+		event = "BufWritePost",
+		opts = {
+			pattern = "*/plugins.lua",
+			command = "source <afile> | PackerCompile",
+		},
+	},
 })
