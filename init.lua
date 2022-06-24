@@ -310,7 +310,7 @@ user_util.augroup("FTOverride", {
 	{
 		event = "FileType",
 		opts = {
-			pattern = { "c" },
+			pattern = { "c", "cpp" },
 			-- Set indent width to 8 spaces and use tabs
 			callback = function()
 				vim.bo.tabstop = 8
