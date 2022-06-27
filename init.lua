@@ -101,6 +101,7 @@ treesitter.setup {
 		"lua",
 		"make",
 		"markdown",
+		"markdown_inline",
 		"org",
 		"python",
 		"query",
