@@ -40,7 +40,7 @@ return packer.startup {
 		use "tpope/vim-dispatch"
 
 		-- Git integration
-		use "tpope/vim-fugitive"
+		-- use "tpope/vim-fugitive"
 		use { "TimUntersberger/neogit", requires = "nvim-lua/plenary.nvim" }
 
 		-- Language Server configuration
