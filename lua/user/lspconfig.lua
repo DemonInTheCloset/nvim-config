@@ -27,9 +27,8 @@ local function on_attach(_, bufnr)
 	vim.keymap.set("n", "gi", vim.lsp.buf.implementation, { noremap = true, buffer = bufnr })
 end
 
-local capabilities = vim.lsp.protocol.make_client_capabilities()
 local cmp_lsp = prequire "cmp_nvim_lsp"
-capabilities = cmp_lsp.update_capabilities(capabilities)
+local capabilities = cmp_lsp.update_capabilities(vim.lsp.protocol.make_client_capabilities())
 
 local lspconfig = prequire "lspconfig"
 

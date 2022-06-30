@@ -4,13 +4,14 @@ vim.g.do_filetype_lua = 1 -- Use filetype.lua
 vim.cmd "filetype plugin on"
 vim.g.mapleader = " "
 
-local user_util = require "user.util"
+local user_util = require "user/util"
 local prequire = user_util.prequire
 
 prequire "user/plugins"
 
 -- [[ nvim settings ]] --
-local CONFIG_PATH = (os.getenv "XDG_CONFIG_HOME" or (os.getenv "HOME" .. "/.config")) .. "/nvim"
+local HOME_PATH = os.getenv "HOME"
+local CONFIG_PATH = (os.getenv "XDG_CONFIG_HOME" or HOME_PATH .. "/.config") .. "/nvim"
 
 -- Path to Python environment
 vim.g.python3_host_prog = CONFIG_PATH .. "/.venv/bin/python"
@@ -208,6 +209,7 @@ cmp.setup {
 
 -- Use buffer source for `/` (if you enabled `native_menu`, this won't work anymore).
 cmp.setup.cmdline("/", {
+	mapping = cmp.mapping.preset.cmdline(),
 	sources = {
 		{ name = "buffer" },
 	},
@@ -215,6 +217,7 @@ cmp.setup.cmdline("/", {
 
 -- Use cmdline & path source for ':' (if you enabled `native_menu`, this won't work anymore).
 cmp.setup.cmdline(":", {
+	mapping = cmp.mapping.preset.cmdline(),
 	sources = cmp.config.sources({
 		{ name = "path" },
 	}, {

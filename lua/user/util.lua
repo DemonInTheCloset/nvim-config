@@ -14,8 +14,8 @@ local function merge_tables(table, new_keys)
 	end
 end
 
-local function augroup(name, autocmds)
-	local group = vim.api.nvim_create_augroup(name, {})
+local function augroup(name, autocmds, opts)
+	local group = vim.api.nvim_create_augroup(name, opts or {})
 	local g = { group = group }
 
 	for _, value in ipairs(autocmds) do
