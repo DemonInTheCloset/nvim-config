@@ -33,43 +33,22 @@ capabilities = cmp_lsp.update_capabilities(capabilities)
 
 local lspconfig = prequire "lspconfig"
 
-lspconfig["hls"].setup {
-	on_attach = on_attach,
-	capabilities = capabilities,
-}
-lspconfig["jsonls"].setup {
-	on_attach = on_attach,
-	capabilities = capabilities,
-}
-lspconfig["pyright"].setup {
-	on_attach = on_attach,
-	capabilities = capabilities,
-}
+lspconfig["hls"].setup { on_attach = on_attach, capabilities = capabilities }
+lspconfig["jsonls"].setup { on_attach = on_attach, capabilities = capabilities }
+lspconfig["pylsp"].setup { on_attach = on_attach, capabilities = capabilities }
 lspconfig["sumneko_lua"].setup {
 	on_attach = on_attach,
 	capabilities = capabilities,
 	settings = {
 		Lua = {
-			runtime = {
-				version = "LuaJIT",
-				path = runtime_path,
-			},
-			diagnostics = {
-				globals = { "vim", "awesome", "screen", "client", "root" },
-			},
-			workspace = {
-				library = vim.api.nvim_get_runtime_file("", true),
-			},
-			telemetry = {
-				enable = false,
-			},
+			runtime = { version = "LuaJIT", path = runtime_path },
+			diagnostics = { globals = { "vim", "awesome", "screen", "client", "root" } },
+			workspace = { library = vim.api.nvim_get_runtime_file("", true) },
+			telemetry = { enable = false },
 		},
 	},
 }
-lspconfig["vimls"].setup {
-	on_attach = on_attach,
-	capabilities = capabilities,
-}
+lspconfig["vimls"].setup { on_attach = on_attach, capabilities = capabilities }
 
 -- [[ Language Specific Plugins ]]
 
@@ -77,19 +56,13 @@ lspconfig["vimls"].setup {
 local rust_tools = prequire "rust-tools"
 rust_tools.setup {
 	-- Send these options to NeoVim
-	server = {
-		on_attach = on_attach,
-		capabilities = capabilities,
-	},
+	server = { on_attach = on_attach, capabilities = capabilities },
 }
 
 local clangd_extensions = prequire "clangd_extensions"
 clangd_extensions.setup {
 	-- Send these options to NeoVim
-	server = {
-		on_attach = on_attach,
-		capabilities = capabilities,
-	},
+	server = { on_attach = on_attach, capabilities = capabilities },
 }
 
 -- [[ null_ls ]] --
