@@ -40,7 +40,7 @@ return packer.startup {
 		use "tpope/vim-dispatch"
 
 		-- Git integration
-		use "tpope/vim-fugitive"
+		-- use "tpope/vim-fugitive"
 		use { "TimUntersberger/neogit", requires = "nvim-lua/plenary.nvim" }
 
 		-- Language Server configuration
@@ -121,6 +121,10 @@ return packer.startup {
 	config = {
 		display = {
 			open_fn = require("packer.util").float,
+		},
+		profile = {
+			enable = true,
+			threshold = 1, -- the amount in ms that a plugins load time must be over for it to be included in the profile
 		},
 	},
 }
