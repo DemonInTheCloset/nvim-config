@@ -12,8 +12,12 @@ prequire "user/plugins"
 -- [[ nvim settings ]] --
 local CONFIG_PATH = (os.getenv "XDG_CONFIG_HOME" or (os.getenv "HOME" .. "/.config")) .. "/nvim"
 
--- Path to Python environment
+-- Providers
 vim.g.python3_host_prog = CONFIG_PATH .. "/.venv/bin/python"
+-- Disable unused
+vim.g.loaded_ruby_provider = 0
+vim.g.loaded_node_provider = 0
+vim.g.loaded_perl_provider = 0
 
 -- Appearance
 vim.opt.number = true -- Show line numbers
