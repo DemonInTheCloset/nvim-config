@@ -47,6 +47,7 @@ lspconfig["sumneko_lua"].setup {
 		},
 	},
 }
+lspconfig["texlab"].setup { on_attach = on_attach, capabilities = capabilities }
 lspconfig["vimls"].setup { on_attach = on_attach, capabilities = capabilities }
 
 -- [[ Language Specific Plugins ]]
