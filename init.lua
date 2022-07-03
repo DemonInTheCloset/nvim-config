@@ -39,8 +39,42 @@ end
 vim.cmd "colorscheme gruvbox" -- Set colorscheme
 
 -- Folds
-vim.o.foldmethod = "expr"
-vim.o.foldexpr = "nvim_treesitter#foldexpr()"
+vim.opt.foldmethod = "syntax"
+-- Treesitter Folds
+user_util.augroup("TreesitterFolds", {
+	event = "Filetype",
+	opts = {
+		pattern = {
+			"html",
+			"json",
+			"javascript",
+			"jsonc",
+			"kotlin",
+			"ledger",
+			"markdown",
+			"python",
+			"latex",
+			"d",
+			"vim",
+			"cmake",
+			"query",
+			"lua",
+			"rust",
+			"toml",
+			"yaml",
+			"c",
+			"bash",
+			"bibtex",
+			"cpp",
+			"css",
+			"devicetree",
+		},
+		callback = function()
+			vim.wo.foldmethod = "expr"
+			vim.wo.foldexpr = "nvim_treesitter#foldexpr()"
+		end,
+	},
+})
 
 -- Statusbar
 vim.o.laststatus = 2 -- Statusbar is always visible
