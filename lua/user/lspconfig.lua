@@ -78,6 +78,7 @@ null_ls.setup {
 		null_ls.builtins.formatting.latexindent,
 		null_ls.builtins.formatting.nginx_beautifier,
 		null_ls.builtins.formatting.prettier,
+		null_ls.builtins.formatting.dfmt,
 		null_ls.builtins.formatting.reorder_python_imports.with {
 			extra_args = { "--application-directories=.:src" },
 		},
