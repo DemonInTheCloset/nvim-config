@@ -67,8 +67,6 @@ clangd_extensions.setup {
 }
 
 -- [[ null_ls ]] --
-local lsp_formatting = vim.api.nvim_create_augroup("LspFormatting", {})
-
 local null_ls = prequire "null-ls"
 null_ls.setup {
 	sources = {
@@ -98,15 +96,15 @@ null_ls.setup {
 
 		null_ls.builtins.code_actions.shellcheck,
 	},
-	-- Format On Save
+	-- Format Keybinding
 	on_attach = function(client, bufnr)
 		if client.supports_method "textDocument/formatting" then
-			vim.api.nvim_clear_autocmds { group = lsp_formatting, buffer = bufnr }
-			vim.api.nvim_create_autocmd("BufWritePre", {
-				group = lsp_formatting,
-				buffer = bufnr,
-				callback = vim.lsp.buf.formatting_seq_sync,
-			})
+			vim.keymap.set(
+				"n",
+				"<leader>w",
+				vim.lsp.buf.formatting_seq_sync,
+				{ noremap = true, buffer = bufnr }
+			)
 		end
 	end,
 }
