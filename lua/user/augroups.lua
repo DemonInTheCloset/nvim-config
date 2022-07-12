@@ -116,7 +116,16 @@ user_util.augroup("HighlightOnYank", {
 		event = "TextYankPost",
 		opts = {
 			pattern = "*",
-			callback = vim.highlight.on_yank,
+			callback = function()
+				vim.highlight.on_yank {
+					higroup = (
+						vim.fn["hlexists"] "HighlightedyankRegion" > 0
+							and "HighlightedyankRegion"
+						or "IncSearch"
+					),
+					timeout = 200,
+				}
+			end,
 		},
 	},
 })
