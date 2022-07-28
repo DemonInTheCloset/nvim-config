@@ -1,3 +1,6 @@
+-- Faster Lua
+require('impatient')
+
 -- Enable Filetype Plugin
 vim.g.do_filetype_lua = 1 -- Use filetype.lua
 -- vim.g.did_load_filetypes = 1 -- Disable filetype.vim

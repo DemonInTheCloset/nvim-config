@@ -21,7 +21,10 @@ return require("packer").startup {
 		-- Time tracking
 		use "wakatime/vim-wakatime"
 		use "ActivityWatch/aw-watcher-vim"
+
+		-- Vim Profiling
 		use { "tweekmonster/startuptime.vim", opt = true, cmd = { "StartupTime" } }
+		use "lewis6991/impatient.nvim"
 
 		-- ColorScheme
 		use { "ellisonleao/gruvbox.nvim", requires = { { "rktjmp/lush.nvim" } } }
