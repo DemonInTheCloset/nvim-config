@@ -38,7 +38,12 @@ return require("packer").startup {
 		}
 
 		-- Jump hints
-		use "unblevable/quick-scope"
+		use {
+			"unblevable/quick-scope",
+			config = function()
+				vim.g.qs_highlight_on_keys = { "f", "F", "t", "T" }
+			end,
+		}
 
 		-- Align Text
 		use {

@@ -49,7 +49,6 @@ opt.foldmethod = "syntax"
 
 -- Statusbar
 opt.laststatus = 2 -- Statusbar is always visible
-g.qs_highlight_on_keys = { "f", "F", "t", "T" }
 
 -- Global Tab and indentation settings
 opt.smarttab = true -- Tabs are smarter
