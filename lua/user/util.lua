@@ -1,9 +1,13 @@
+-- Useful Constants
+local HOME_PATH = os.getenv "HOME"
+local CONFIG_PATH = (os.getenv "XDG_CONFIG_HOME" or HOME_PATH .. "/.config") .. "/nvim"
+
 -- Continue reading configuration even if it contains an error
-local function prequire(...)
-	local ok, ret = pcall(require, ...)
+local function prequire(module)
+	local ok, ret = pcall(require, module)
 	if not ok then
-		print('Error: require("' .. ... .. '") failed')
-		return {}
+		print('Error: require("' .. module .. '") failed')
+		return nil
 	end
 	return ret
 end
@@ -28,6 +32,8 @@ local function augroup(name, autocmds, opts)
 end
 
 return {
+	HOME_PATH = HOME_PATH,
+	CONFIG_PATH = CONFIG_PATH,
 	prequire = prequire,
 	merge_tables = merge_tables,
 	augroup = augroup,
