@@ -32,7 +32,6 @@ opt.relativenumber = true -- Show relative line numbers
 opt.colorcolumn = "80" -- Color column 80
 opt.cursorline = true -- Highlight selected line
 opt.wrap = false -- Long lines don't wrap
-opt.signcolumn = "number" -- Merge line numbers with coc messages
 g.gruvbox_italic = 1 -- Allow italic font
 
 -- In list mode show tabs and leading and trailing spaces
