@@ -149,7 +149,7 @@ user_util.augroup("PackerUpdate", {
 	{
 		event = "BufWritePost",
 		opts = {
-			pattern = "plugins.lua",
+			pattern = "packer.lua",
 			command = "source <afile> | PackerCompile",
 		},
 	},

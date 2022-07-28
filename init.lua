@@ -10,7 +10,8 @@ vim.g.mapleader = " "
 local user_util = require "user/util"
 local prequire = user_util.prequire
 
-prequire "user/plugins"
+-- Plugins
+prequire "user/packer"
 
 -- [[ nvim settings ]] --
 local CONFIG_PATH = user_util.CONFIG_PATH
