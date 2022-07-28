@@ -1,6 +1,6 @@
 -- Useful Constants
-local HOME_PATH = os.getenv "HOME"
-local CONFIG_PATH = (os.getenv "XDG_CONFIG_HOME" or HOME_PATH .. "/.config") .. "/nvim"
+local HOME_PATH = vim.env.HOME
+local CONFIG_PATH = (vim.env.XDG_CONFIG_HOME or HOME_PATH .. "/.config") .. "/nvim"
 
 -- Continue reading configuration even if it contains an error
 local function prequire(module)
