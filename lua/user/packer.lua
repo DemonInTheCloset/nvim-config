@@ -33,18 +33,7 @@ return require("packer").startup {
 		use {
 			"norcalli/nvim-colorizer.lua",
 			config = function()
-				require("colorizer").setup({ "*" }, {
-					RGB = true, -- #RGB hex codes
-					RRGGBB = true, -- #RRGGBB hex codes
-					names = false, -- "Name" codes like Blue
-					RRGGBBAA = true, -- #RRGGBBAA hex codes
-					rgb_fn = false, -- CSS rgb() and rgba() functions
-					hsl_fn = false, -- CSS hsl() and hsla() functions
-					css = false, -- Enable all CSS features: rgb_fn, hsl_fn, names, RGB, RRGGBB
-					css_fn = false, -- Enable all CSS *functions*: rgb_fn, hsl_fn
-					-- Available modes: foreground, background
-					mode = "background", -- Set the display mode.
-				})
+				require "user/plugins/colorizer"
 			end,
 		}
 
@@ -76,11 +65,15 @@ return require("packer").startup {
 		use {
 			"TimUntersberger/neogit",
 			requires = { { "nvim-lua/plenary.nvim" } },
-			opt = true,
-			cmd = { "Neogit" },
 			config = function()
-				require("neogit").setup()
+				require("neogit").setup {}
 				require("user/keymaps").neogit_keys()
+			end,
+		}
+		use {
+			"lewis6991/gitsigns.nvim",
+			config = function()
+				require("gitsigns").setup()
 			end,
 		}
 
@@ -103,54 +96,7 @@ return require("packer").startup {
 		use {
 			"hrsh7th/nvim-cmp",
 			config = function()
-				-- [[ nvim-cmp config ]] --
-				local cmp = require "cmp"
-				cmp.setup {
-					snippet = {
-						expand = function(args)
-							require("luasnip").lsp_expand(args.body)
-						end,
-					},
-					mapping = cmp.mapping.preset.insert {
-						["<C-b>"] = cmp.mapping.scroll_docs(-4),
-						["<C-f>"] = cmp.mapping.scroll_docs(4),
-						["<C-Space>"] = cmp.mapping.complete {},
-						["<C-e>"] = cmp.mapping.close(),
-						["<CR>"] = cmp.mapping.confirm { select = true },
-					},
-					sources = cmp.config.sources({
-						{ name = "nvim_lua" },
-						{ name = "nvim_lsp" },
-						{ name = "path" },
-						{ name = "luasnip" },
-					}, {
-						{ name = "buffer" },
-					}),
-					formatting = {
-						format = require("lspkind").cmp_format {
-							with_text = false,
-							maxwidth = 50,
-						},
-					},
-				}
-
-				-- Use buffer source for `/` (if you enabled `native_menu`, this won't work anymore).
-				cmp.setup.cmdline("/", {
-					mapping = cmp.mapping.preset.cmdline(),
-					sources = {
-						{ name = "buffer" },
-					},
-				})
-
-				-- Use cmdline & path source for ':' (if you enabled `native_menu`, this won't work anymore).
-				cmp.setup.cmdline(":", {
-					mapping = cmp.mapping.preset.cmdline(),
-					sources = cmp.config.sources({
-						{ name = "path" },
-					}, {
-						{ name = "cmdline" },
-					}),
-				})
+				require "user/plugins/cmp"
 			end,
 		}
 		use "jose-elias-alvarez/null-ls.nvim" -- Formatting support
@@ -182,71 +128,7 @@ return require("packer").startup {
 			"nvim-treesitter/nvim-treesitter",
 			run = ":TSUpdate",
 			config = function()
-				local ts_langs = {
-					"bash",
-					"bibtex",
-					"c",
-					"cmake",
-					"comment",
-					"cpp",
-					"css",
-					"d",
-					"devicetree",
-					"dockerfile",
-					"dot",
-					"elm",
-					"haskell",
-					"help",
-					"html",
-					"http",
-					"java",
-					"javascript",
-					"jsdoc",
-					"json",
-					"json5",
-					"jsonc",
-					"kotlin",
-					"latex",
-					"ledger",
-					"llvm",
-					"lua",
-					"make",
-					"markdown",
-					"markdown_inline",
-					"org",
-					"python",
-					"query",
-					"regex",
-					"rust",
-					"todotxt",
-					"toml",
-					"vim",
-					"yaml",
-				}
-
-				require("nvim-treesitter.configs").setup {
-					ensure_installed = ts_langs,
-					-- install languages synchronously (only applied to `ensure_installed`)
-					sync_install = false,
-					highlight = {
-						enable = true,
-						additional_vim_regex_highlighting = false,
-					},
-					incremental_selection = { enable = true },
-					indent = { enable = true },
-				}
-
-				-- Treesitter Folds
-				require("user/util").augroup("TreesitterFolds", {
-					event = "Filetype",
-					opts = {
-						pattern = ts_langs,
-						callback = function()
-							vim.wo.foldmethod = "expr"
-							vim.wo.foldexpr = "nvim_treesitter#foldexpr()"
-						end,
-					},
-				})
+				require "user/plugins/treesitter"
 			end,
 		}
 		use { "baskerville/vim-sxhkdrc", ft = "sxhkdrc" }
@@ -260,8 +142,8 @@ return require("packer").startup {
 			end,
 		}
 
-		-- Fuzzy find
 		use "nvim-lua/plenary.nvim"
+		-- Fuzzy find
 		use {
 			"nvim-telescope/telescope.nvim",
 			requires = {
@@ -270,26 +152,15 @@ return require("packer").startup {
 				{ "nvim-telescope/telescope-fzy-native.nvim" },
 			},
 			config = function()
-				local telescope = require "telescope"
-				telescope.setup {
-					extensions = {
-						["ui-select"] = {
-							require("telescope.themes").get_dropdown {},
-						},
-					},
-				}
+				require "user/plugins/telescope"
+			end,
+		}
 
-				require("user/keymaps").telescope_keys(require "telescope.builtin")
-
-				local function ptelescope_load_extension(extension)
-					local ok, _ = pcall(telescope.load_extension, extension)
-					if not ok then
-						print("Error[Telescope]: Failed to load " .. extension .. " extension")
-					end
-				end
-
-				ptelescope_load_extension "fzy_native"
-				ptelescope_load_extension "ui-select"
+		use {
+			"hood/popui.nvim",
+			requires = { { "RishabhRD/popfix" } },
+			config = function()
+				vim.ui.input = require "popui.input-overrider"
 			end,
 		}
 
