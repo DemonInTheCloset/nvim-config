@@ -83,11 +83,27 @@ return require("packer").startup {
 		}
 
 		-- Language Server configuration
-		use "neovim/nvim-lspconfig"
+		use {
+			"neovim/nvim-lspconfig",
+			config = function()
+				require "user/plugins/lspconfig"
+			end,
+		}
 		use "onsails/lspkind-nvim"
 		use "mfussenegger/nvim-jdtls" -- Java JDTLS support
-		use { "simrat39/rust-tools.nvim", requires = { { "nvim-lua/plenary.nvim" } } }
-		use { "p00f/clangd_extensions.nvim" }
+		use {
+			"simrat39/rust-tools.nvim",
+			requires = { { "nvim-lua/plenary.nvim" } },
+			config = function()
+				require "user/plugins/rust_tools"
+			end,
+		}
+		use {
+			"p00f/clangd_extensions.nvim",
+			config = function()
+				require "clangd_extensions"
+			end,
+		}
 
 		-- Debugging
 		use "mfussenegger/nvim-dap"
@@ -104,7 +120,13 @@ return require("packer").startup {
 				require "user/plugins/cmp"
 			end,
 		}
-		use "jose-elias-alvarez/null-ls.nvim" -- Formatting support
+		-- Formatting support
+		use {
+			"jose-elias-alvarez/null-ls.nvim",
+			config = function()
+				require "user/plugins/null_ls"
+			end,
+		}
 
 		-- Snippet support
 		use {

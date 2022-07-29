@@ -81,8 +81,5 @@ if keymaps ~= nil then
 	keymaps.vim_keys()
 end
 
--- [[ LSP configuration ]] --
-prequire "user/lspconfig"
-
 -- [[ augroups ]] --
 prequire "user/augroups"
