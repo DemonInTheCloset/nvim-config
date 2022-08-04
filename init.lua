@@ -1,5 +1,8 @@
 -- Faster Lua
-require('impatient')
+local ok,_ = pcall(require, 'impatient')
+if not ok then
+    print("Impatient.nvim is not available, maybe run :PackerSync?")
+end
 
 -- Constants
 local user_util = require "user/util"
