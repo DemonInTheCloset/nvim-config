@@ -45,6 +45,14 @@ return require("packer").startup {
 			end,
 		}
 
+		-- Show enclosing Scope at the Top
+		use {
+			"nvim-treesitter/nvim-treesitter-context",
+			config = function()
+				require("treesitter-context").setup {}
+			end,
+		}
+
 		-- Align Text
 		use {
 			"junegunn/vim-easy-align",
@@ -120,6 +128,7 @@ return require("packer").startup {
 				require "user/plugins/cmp"
 			end,
 		}
+
 		-- Formatting support
 		use {
 			"jose-elias-alvarez/null-ls.nvim",
