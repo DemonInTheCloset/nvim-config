@@ -18,7 +18,7 @@ local function vim_keys()
 	vim.keymap.set("n", "<leader>dk", vim.diagnostic.goto_prev, { noremap = true })
 
 	-- Run Jaq
-	vim.keymap.set("n", "<leader>r", function()
+	vim.keymap.set("n", "<leader>j", function()
 		if vim.bo.filetype == "Jaq" then
 			vim.cmd "q"
 		end
