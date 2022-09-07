@@ -35,6 +35,7 @@ opt.relativenumber = true -- Show relative line numbers
 opt.colorcolumn = "80" -- Color column 80
 opt.cursorline = true -- Highlight selected line
 opt.wrap = false -- Long lines don't wrap
+opt.splitright = true -- Vert splits to the right
 g.gruvbox_italic = 1 -- Allow italic font
 
 -- In list mode show tabs and leading and trailing spaces

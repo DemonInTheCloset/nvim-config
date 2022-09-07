@@ -85,8 +85,8 @@ return require("packer").startup {
         -- Async commands
         use {
             "tpope/vim-dispatch",
-            opt = true,
-            cmd = { "Dispatch", "Make", "Focus", "Start" },
+            -- opt = true,
+            -- cmd = { "Dispatch", "Make", "Focus", "Start" },
             config = function()
                 require("user/keymaps").dispatch_keys()
             end,

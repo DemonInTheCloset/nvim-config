@@ -16,6 +16,15 @@ local function vim_keys()
 	-- Diagnostics
 	vim.keymap.set("n", "<leader>dj", vim.diagnostic.goto_next, { noremap = true })
 	vim.keymap.set("n", "<leader>dk", vim.diagnostic.goto_prev, { noremap = true })
+
+	-- Run Jaq
+	vim.keymap.set("n", "<leader>r", function()
+		if vim.bo.filetype == "Jaq" then
+			vim.cmd "q"
+		end
+
+		vim.cmd "Jaq"
+	end)
 end
 
 -- [[ Plugin remaps ]]
