@@ -123,6 +123,47 @@ return require("packer").startup {
                 }
             end,
         }
+        use {
+            "is0n/jaq-nvim",
+            config = function()
+                require("jaq-nvim").setup {
+                    cmds = {
+                        external = {
+                            rust = "cargo test",
+                        },
+                    },
+
+                    behavior = {
+                        -- Default type
+                        default = "terminal",
+                        -- Start in insert mode
+                        startinsert = false,
+                        -- Use `wincmd p` on startup
+                        wincmd = false,
+                        -- Auto-save files
+                        autosave = false,
+                    },
+
+                    ui = {
+                        terminal = {
+                            -- Window position
+                            position = "vert",
+                            -- Window size
+                            size = 80,
+                            -- Disable line numbers
+                            line_no = true,
+                        },
+
+                        quickfix = {
+                            -- Window position
+                            position = "bot",
+                            -- Window size
+                            size = 10,
+                        },
+                    },
+                }
+            end,
+        }
 
         -- Git integration
         -- use "tpope/vim-fugitive"
