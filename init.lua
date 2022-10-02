@@ -52,6 +52,7 @@ opt.foldmethod = "syntax"
 
 -- Statusbar
 opt.laststatus = 2 -- Statusbar is always visible
+opt.cmdheight = 0 -- Don't show commands unless there is output
 
 -- Global Tab and indentation settings
 opt.smarttab = true -- Tabs are smarter
@@ -69,15 +70,6 @@ opt.hlsearch = true
 opt.incsearch = true
 opt.ignorecase = true -- Search ignores cases
 opt.smartcase = true -- Unless it has a capital letter
-
--- Options recommended by CoC
-opt.updatetime = 300 -- Update every 300 ms
-opt.timeoutlen = 200 -- Timeout after 200 ms
-opt.hidden = true -- TextEdit might fail otherwise
-opt.shortmess:append "c" -- Don't pass messages to ins-completion-menu
-opt.cmdheight = 3 -- Give more space for messages
-opt.backup = false -- Some LSPs have problems with backups
-opt.writebackup = false
 
 -- [[ Keymaps ]] --
 local keymaps = prequire "user/keymaps"
