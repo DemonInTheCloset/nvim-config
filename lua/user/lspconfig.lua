@@ -27,7 +27,7 @@ end
 
 local cmp_lsp = prequire "cmp_nvim_lsp"
 if cmp_lsp ~= nil then
-    capabilities = cmp_lsp.update_capabilities(capabilities)
+	capabilities = cmp_lsp.update_capabilities(capabilities)
 end
 
 return {

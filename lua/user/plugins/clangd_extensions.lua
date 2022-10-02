@@ -8,4 +8,3 @@ if clangd_extensions ~= nil then
 		server = { on_attach = on_attach, capabilities = capabilities },
 	}
 end
-

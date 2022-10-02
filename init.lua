@@ -1,7 +1,7 @@
 -- Faster Lua
-local ok,_ = pcall(require, 'impatient')
+local ok, _ = pcall(require, "impatient")
 if not ok then
-    print("Impatient.nvim is not available, maybe run :PackerSync?")
+	print "Impatient.nvim is not available, maybe run :PackerSync?"
 end
 
 -- Constants
