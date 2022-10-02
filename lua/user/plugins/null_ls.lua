@@ -34,7 +34,7 @@ null_ls.setup {
             vim.keymap.set(
                 "n",
                 "<leader>w",
-                vim.lsp.buf.formatting_seq_sync,
+                vim.lsp.buf.format,
                 { noremap = true, buffer = bufnr }
             )
         end
