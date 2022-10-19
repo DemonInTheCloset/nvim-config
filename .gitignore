@@ -3,3 +3,6 @@
 
 # Compiled Plugins
 plugin
+
+# Configuration Override
+lua/user/config.lua

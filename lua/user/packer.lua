@@ -13,14 +13,21 @@ if fn.empty(fn.glob(install_path)) > 0 then
 	}
 end
 
+local util = require "user/util"
+local config = util.get_config()
+
 -- Plugins
 return require("packer").startup {
 	function(use)
 		use "wbthomason/packer.nvim"
 
 		-- Time tracking
-		use "wakatime/vim-wakatime"
-		use "ActivityWatch/aw-watcher-vim"
+		if config.time_tracking or config.wakatime then
+			use "wakatime/vim-wakatime"
+		end
+		if config.time_tracking or config.activity_watch then
+			use "ActivityWatch/aw-watcher-vim"
+		end
 
 		-- Vim Profiling
 		use { "tweekmonster/startuptime.vim", opt = true, cmd = { "StartupTime" } }
