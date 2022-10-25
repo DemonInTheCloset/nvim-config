@@ -66,7 +66,10 @@ end
 
 -- Neogit
 local function neogit_keys()
-	vim.keymap.set("n", "<leader>git", "<cmd>Neogit<CR>", { noremap = true })
+	local neogit = require "neogit"
+	vim.keymap.set("n", "<leader>git", function()
+		neogit.open()
+	end, { noremap = true })
 end
 
 return {
