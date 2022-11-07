@@ -5,4 +5,7 @@ return {
 	time_tracking = true,
 	wakatime = false,
 	activity_watch = false,
+    -- Where to open a new pane (used by some functions)
+    -- Values = {'top', 'bottom', 'left', 'right'}
+    pane_side = 'right'
 }
