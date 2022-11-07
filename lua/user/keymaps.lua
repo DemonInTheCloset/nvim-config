@@ -12,13 +12,12 @@ local function vim_keys()
 			error("wezterm not found in $PATH", 3)
 		end
 
-		local filepath = vim.fn.expand "<cfile>"
-		local cmd = [[silent !wezterm cli split-pane -- bash -c 'wezterm imgcat "]]
-			.. filepath
-			.. [[" ; read']]
-		print(cmd)
+		local img_path = vim.fn.expand "<cfile>"
+		local new_pane = [[!wezterm cli split-pane --]]
+			.. require("user/util").get_config()["pane_side"]
+		local open_image = [[ -- bash -c 'wezterm imgcat "]] .. img_path .. [[" ; read']]
 
-		vim.cmd(cmd)
+		vim.cmd([[silent ]] .. new_pane .. open_image)
 	end, { noremap = true })
 
 	-- Keep selection while indenting
