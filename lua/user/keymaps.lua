@@ -6,6 +6,21 @@ local function vim_keys()
 	vim.keymap.set("n", "<leader>qj", "<cmd>cnext<CR>", { noremap = true })
 	vim.keymap.set("n", "<leader>qk", "<cmd>cprev<CR>", { noremap = true })
 
+	-- Preview Images Using wezterm
+	vim.keymap.set("n", "<leader>p", function()
+		if vim.fn.executable "wezterm" == 0 then
+			error("wezterm not found in $PATH", 3)
+		end
+
+		local filepath = vim.fn.expand "<cfile>"
+		local cmd = [[silent !wezterm cli split-pane -- bash -c 'wezterm imgcat "]]
+			.. filepath
+			.. [[" ; read']]
+		print(cmd)
+
+		vim.cmd(cmd)
+	end, { noremap = true })
+
 	-- Keep selection while indenting
 	vim.keymap.set("v", ">", ">gv", { noremap = true })
 	vim.keymap.set("v", "<", "<gv", { noremap = true })
