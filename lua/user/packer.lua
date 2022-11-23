@@ -29,6 +29,9 @@ return require("packer").startup {
 			use "ActivityWatch/aw-watcher-vim"
 		end
 
+		-- Edit Filesystem like a normal file
+		use "elihunter173/dirbuf.nvim"
+
 		-- Vim Profiling
 		use { "tweekmonster/startuptime.vim", opt = true, cmd = { "StartupTime" } }
 		use "lewis6991/impatient.nvim"
