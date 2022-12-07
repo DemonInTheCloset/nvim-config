@@ -52,7 +52,7 @@ opt.foldmethod = "syntax"
 
 -- Statusbar
 opt.laststatus = 2 -- Statusbar is always visible
-opt.cmdheight = 0 -- Don't show commands unless there is output
+opt.cmdheight = 1 -- Small cmd bar
 
 -- Global Tab and indentation settings
 opt.smarttab = true -- Tabs are smarter
