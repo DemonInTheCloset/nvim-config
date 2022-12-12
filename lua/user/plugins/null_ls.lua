@@ -12,9 +12,9 @@ null_ls.setup {
 		null_ls.builtins.formatting.reorder_python_imports.with {
 			extra_args = { "--application-directories=.:src" },
 		},
-		null_ls.builtins.formatting.rustfmt,
 		null_ls.builtins.formatting.shellharden,
 		null_ls.builtins.formatting.shfmt,
+		null_ls.builtins.formatting.beautysh,
 		null_ls.builtins.formatting.stylua,
 		null_ls.builtins.formatting.taplo,
 
@@ -24,6 +24,8 @@ null_ls.setup {
 		null_ls.builtins.diagnostics.trail_space,
 		-- null_ls.builtins.diagnostics.vulture,
 		null_ls.builtins.diagnostics.zsh,
+
+		null_ls.builtins.hover.printenv,
 	},
 	-- Format Keybinding
 	on_attach = function(client, bufnr)
