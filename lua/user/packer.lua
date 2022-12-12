@@ -219,15 +219,26 @@ return require("packer").startup {
 		use "mfussenegger/nvim-dap"
 
 		-- Completion Support
-		use "hrsh7th/cmp-nvim-lsp" -- Language server hints
-		use "hrsh7th/cmp-buffer" -- Words from the buffer
-		use "hrsh7th/cmp-path" -- Path like strings (ie. /usr/bin/nvim)
-		use "hrsh7th/cmp-cmdline" -- Commands completion
-		use "saadparwaiz1/cmp_luasnip" -- Snippet support
 		use {
 			"hrsh7th/nvim-cmp",
 			config = function()
 				require "user/plugins/cmp"
+			end,
+			requires = {
+				"hrsh7th/cmp-nvim-lsp", -- Language server hints
+				"hrsh7th/cmp-buffer", -- Words from the buffer
+				"cmp-nvim-lsp-signature-help", -- Function signatures
+				"hrsh7th/cmp-path", -- Path like strings (ie. /usr/bin/nvim)
+				"hrsh7th/cmp-cmdline", -- Commands completion
+				"saadparwaiz1/cmp_luasnip", -- Snippet support
+			},
+		}
+		use { -- Rust Cargo.toml
+			"saecki/crates.nvim",
+			event = { "BufRead Cargo.toml" },
+			requires = { { "nvim-lua/plenary.nvim" } },
+			config = function()
+				require("crates").setup()
 			end,
 		}
 
