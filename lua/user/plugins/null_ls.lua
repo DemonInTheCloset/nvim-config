@@ -21,12 +21,9 @@ null_ls.setup {
 		null_ls.builtins.diagnostics.checkmake,
 		null_ls.builtins.diagnostics.chktex,
 		null_ls.builtins.diagnostics.mypy,
-		null_ls.builtins.diagnostics.shellcheck,
 		null_ls.builtins.diagnostics.trail_space,
 		-- null_ls.builtins.diagnostics.vulture,
 		null_ls.builtins.diagnostics.zsh,
-
-		null_ls.builtins.code_actions.shellcheck,
 	},
 	-- Format Keybinding
 	on_attach = function(client, bufnr)

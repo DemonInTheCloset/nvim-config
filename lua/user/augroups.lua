@@ -98,13 +98,6 @@ user_util.augroup("SetDispatch", {
 	{
 		event = "FileType",
 		opts = {
-			pattern = { "sh", "bash" },
-			command = ":compiler shellcheck",
-		},
-	},
-	{
-		event = "FileType",
-		opts = {
 			pattern = "porth",
 			command = ":compiler porth",
 		},
