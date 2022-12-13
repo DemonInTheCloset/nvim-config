@@ -27,10 +27,4 @@ null_ls.setup {
 
 		null_ls.builtins.hover.printenv,
 	},
-	-- Format Keybinding
-	on_attach = function(client, bufnr)
-		if client.supports_method "textDocument/formatting" then
-			vim.keymap.set("n", "<leader>w", vim.lsp.buf.format, { noremap = true, buffer = bufnr })
-		end
-	end,
 }
