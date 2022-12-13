@@ -227,7 +227,7 @@ return require("packer").startup {
 			requires = {
 				"hrsh7th/cmp-nvim-lsp", -- Language server hints
 				"hrsh7th/cmp-buffer", -- Words from the buffer
-				"cmp-nvim-lsp-signature-help", -- Function signatures
+				"hrsh7th/cmp-nvim-lsp-signature-help", -- Function signatures
 				"hrsh7th/cmp-path", -- Path like strings (ie. /usr/bin/nvim)
 				"hrsh7th/cmp-cmdline", -- Commands completion
 				"saadparwaiz1/cmp_luasnip", -- Snippet support
@@ -282,6 +282,7 @@ return require("packer").startup {
 		}
 		use { "baskerville/vim-sxhkdrc", ft = "sxhkdrc" }
 		use { "chunkhang/vim-mbsync", ft = "mbsyncrc" }
+		use "elkowar/yuck.vim"
 		-- use "https://gitlab.com/DemonInTheCloset/porth-vim.git"
 
 		use {
