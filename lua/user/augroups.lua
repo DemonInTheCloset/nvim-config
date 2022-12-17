@@ -155,7 +155,7 @@ user_util.augroup("JumpToLastLine", {
 			pattern = "*",
 			callback = function()
 				if vim.fn.line "'\"" > 0 and vim.fn.line "'\"" <= vim.fn.line "$" then
-					vim.cmd.execute "normal! g'\""
+					vim.cmd [[execute "normal! g'\""]]
 				end
 			end,
 		},
