@@ -1,7 +1,7 @@
 -- Faster Lua
 local ok, _ = pcall(require, "impatient")
 if not ok then
-	print "Impatient.nvim is not available, maybe run :PackerSync?"
+    print "Impatient.nvim is not available, maybe run :PackerSync?"
 end
 
 -- Constants
@@ -43,9 +43,9 @@ opt.listchars = { tab = "==>", trail = "·", lead = "·" }
 
 -- Colors
 if fn.has "termguicolors" == 1 then
-	opt.termguicolors = true -- Allow Truecolor Support
+    opt.termguicolors = true -- Allow Truecolor Support
 end
-vim.cmd "colorscheme gruvbox" -- Set colorscheme
+vim.cmd.colorscheme "gruvbox" -- Set colorscheme
 
 -- Folds
 opt.foldmethod = "syntax"
@@ -74,7 +74,7 @@ opt.smartcase = true -- Unless it has a capital letter
 -- [[ Keymaps ]] --
 local keymaps = prequire "user/keymaps"
 if keymaps ~= nil then
-	keymaps.vim_keys()
+    keymaps.vim_keys()
 end
 
 -- [[ augroups ]] --
