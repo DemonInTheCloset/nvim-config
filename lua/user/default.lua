@@ -2,7 +2,7 @@
 
 return {
 	-- Enable Time Tracking (both wakatime and activity_watch)
-	time_tracking = true,
+	time_tracking = false,
 	wakatime = false,
 	activity_watch = false,
 	-- Where to open a new pane (used by some functions)
