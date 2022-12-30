@@ -1,6 +1,6 @@
 # My NeoVim Configuration
 
-Uses Neovim `0.7+` on Linux
+Uses Neovim `0.8+` on Linux, the Java LSP will not work on other platforms
 
 ## Setup
 
