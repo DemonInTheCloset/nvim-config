@@ -10,7 +10,7 @@ lspconfig["hls"].setup { on_attach = on_attach, capabilities = capabilities }
 lspconfig["jsonls"].setup { on_attach = on_attach, capabilities = capabilities }
 lspconfig["pylsp"].setup { on_attach = on_attach, capabilities = capabilities }
 lspconfig["serve_d"].setup { on_attach = on_attach, capabilities = capabilities }
-lspconfig["sumneko_lua"].setup {
+lspconfig["lua_ls"].setup {
 	on_attach = on_attach,
 	capabilities = capabilities,
 	settings = {
