@@ -8,7 +8,7 @@ table.insert(runtime_path, "lua/?/init.lua")
 local lspconfig = require "lspconfig"
 lspconfig["hls"].setup { on_attach = on_attach, capabilities = capabilities }
 lspconfig["jsonls"].setup { on_attach = on_attach, capabilities = capabilities }
-lspconfig["pylsp"].setup { on_attach = on_attach, capabilities = capabilities }
+lspconfig["ruff_lsp"].setup { on_attach = on_attach, capabilities = capabilities }
 lspconfig["serve_d"].setup { on_attach = on_attach, capabilities = capabilities }
 lspconfig["lua_ls"].setup {
 	on_attach = on_attach,
