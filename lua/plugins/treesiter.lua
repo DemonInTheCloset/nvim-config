@@ -1,6 +1,9 @@
 return {
+    { "nvim-treesitter/nvim-treesitter-context", lazy = false, name = "treesitter-context", dependencies = { "nvim-treesitter" } },
+
 	{
 		"nvim-treesitter/nvim-treesitter",
+		lazy = false,
 		build = ":TSUpdate",
 		opts = {
 			-- Automatically install these parsers

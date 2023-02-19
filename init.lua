@@ -70,7 +70,7 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 -- Load Plugins
-require("lazy").setup("plugins")
+require("lazy").setup("plugins", { defaults = { lazy = true } })
 
 -- Set colorscheme
 if vim.fn.has("termguicolors") then
