@@ -29,6 +29,7 @@ end
 return {
     {
         "neovim/nvim-lspconfig",
+        name = "lspconfig",
         event = { "BufReadPre", "BufNewFile" },
         dependencies = {
             "cmp",
@@ -59,18 +60,6 @@ return {
             lspconfig["vimls"].setup({ on_attach = on_attach, capabilities = capabilities })
         end,
     },
-
-    {
-        "williamboman/mason-lspconfig.nvim",
-        name = "mason-lspconfig",
-        dependencies = { "mason" },
-        opts = {
-            ensure_installed = { "lua_ls", "rust_analyzer" },
-            automatic_installation = true,
-        },
-    },
-
-    { "williamboman/mason.nvim", name = "mason",  cmd = { "Mason", "MasonLog" } },
 
     {
         "saecki/crates.nvim",
