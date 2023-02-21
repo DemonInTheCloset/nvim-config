@@ -1,0 +1,17 @@
+name: 'formatting-check'
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+
+jobs:
+  stylua:
+    runs-on:
+    steps:
+      - uses: actions/checkout@v3
+      - uses: JohnnyMorganz/stylua-action@v2
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          version: 0.16.1
+          args: --check .
