@@ -73,3 +73,6 @@ require('lazy').setup('plugins', { defaults = { lazy = true } })
 -- Set colorscheme
 if vim.fn.has 'termguicolors' then vim.g.termguicolors = true end
 vim.cmd.colorscheme 'gruvbox-baby'
+
+-- Enable autocmds
+require 'config.autocmds'
