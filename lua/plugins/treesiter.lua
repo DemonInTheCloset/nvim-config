@@ -4,7 +4,7 @@ return {
 		lazy = false,
 		name = 'treesitter-context',
 		dependencies = { 'nvim-treesitter' },
-        config = true,
+		config = true,
 	},
 
 	{
