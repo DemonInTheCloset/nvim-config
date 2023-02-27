@@ -70,7 +70,7 @@ return {
 	{
 		'saecki/crates.nvim',
 		event = { 'BufRead Cargo.toml' },
-		requires = { 'nvim-lua/plenary.nvim' },
+		dependencies = { 'nvim-lua/plenary.nvim' },
 		name = 'crates',
 		config = true,
 	},
