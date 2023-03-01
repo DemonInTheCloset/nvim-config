@@ -50,7 +50,7 @@ augroup('FTOverride', {
 	{
 		event = 'FileType',
 		opts = {
-			pattern = { 'porth', 'haskell', 'markdown', 'java' },
+			pattern = { 'porth', 'haskell', 'markdown', 'java', 'nix' },
 			-- Set indent width to 2 spaces
 			callback = function()
 				vim.bo.tabstop = 2
