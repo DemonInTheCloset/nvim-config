@@ -5,11 +5,4 @@ return {
 		name = 'gitsigns',
 		config = true,
 	},
-
-	{
-		'TimUntersberger/neogit',
-		dependencies = { 'nvim-lua/plenary.nvim' },
-		cmd = 'Neogit',
-		config = true,
-	},
 }
