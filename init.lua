@@ -70,6 +70,9 @@ vim.opt.rtp:prepend(lazypath)
 -- Load Plugins
 require('lazy').setup('plugins', { defaults = { lazy = true } })
 
+-- Setup Pop UI
+vim.ui.input = require 'popui.input-overrider'
+
 -- Set colorscheme
 if vim.fn.has 'termguicolors' then vim.g.termguicolors = true end
 vim.cmd.colorscheme 'gruvbox-baby'
