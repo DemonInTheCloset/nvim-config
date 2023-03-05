@@ -27,6 +27,9 @@ return {
 			incremental_selection = { enable = true },
 			indent = { enable = true },
 		},
-		config = function(_, opts) require('nvim-treesitter.configs').setup(opts) end,
+		config = function(_, opts)
+			vim.opt.runtimepath:append '$HOME/.local/share/treesitter'
+			require('nvim-treesitter.configs').setup(opts)
+		end,
 	},
 }
