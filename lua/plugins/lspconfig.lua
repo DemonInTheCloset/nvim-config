@@ -51,6 +51,7 @@ return {
 			lspconfig['jsonls'].setup { on_attach = on_attach, capabilities = capabilities }
 			lspconfig['ruff_lsp'].setup { on_attach = on_attach, capabilities = capabilities }
 			lspconfig['serve_d'].setup { on_attach = on_attach, capabilities = capabilities }
+			lspconfig['taplo'].setup { on_attach = on_attach, capabilities = capabilities }
 			lspconfig['lua_ls'].setup {
 				on_attach = on_attach,
 				capabilities = capabilities,
