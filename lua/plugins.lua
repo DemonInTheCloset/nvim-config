@@ -7,11 +7,13 @@ return {
 	{
 		'numToStr/FTerm.nvim',
 		name = 'FTerm',
-		keys = {
-			{ '<leader>to', function() require('FTerm').open() end, desc = '[T]erminal [O]pen' },
-			{ '<leader>tc', function() require('FTerm').close() end, desc = '[T]erminal [C]lose' },
-			{ '<leader>te', function() require('FTerm').exit() end, desc = '[T]erminal [E]xit' },
-		},
+		keys = function()
+			return {
+				{ '<leader>to', require('FTerm').open, desc = '[T]erminal [O]pen' },
+				{ '<leader>tc', require('FTerm').close, desc = '[T]erminal [C]lose' },
+				{ '<leader>te', require('FTerm').exit, desc = '[T]erminal [E]xit' },
+			}
+		end,
 		opts = {},
 	},
 }
