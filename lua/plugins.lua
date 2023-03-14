@@ -15,6 +15,9 @@ return {
 		keys = function()
 			local ok, fterm = pcall(require, 'FTerm')
 			if ok then
+                ---Ephemeral Terminal
+                ---@param opts table Table containing teminal configuration
+                ---@return function # Function that opens the terminal
 				local function oneshot(opts)
 					return function() fterm.scratch(opts) end
 				end
