@@ -1,35 +1,43 @@
+---Setup LSP after attaching
+---@param client any The LSP client
+---@param bufnr any The neovim buffer
 local function on_attach(client, bufnr)
-	-- Omnifunc
+	local merge_tables = require('config/util').merge_tables
+	-- Common keymap options
+	local opts = { noremap = true, buffer = bufnr }
+	-- Configure Omnifunc
 	vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
-
 	-- Keymaps
 	-- LSP actions
-	vim.keymap.set('n', 'K', vim.lsp.buf.hover, { noremap = true, buffer = bufnr })
-	vim.keymap.set('n', '<leader>r', vim.lsp.buf.rename, { noremap = true, buffer = bufnr })
-	vim.keymap.set('n', '<leader>fa', vim.lsp.buf.code_action, { noremap = true, buffer = bufnr })
-	vim.keymap.set('v', '<leader>fa', vim.lsp.buf.range_code_action, { noremap = true, buffer = bufnr })
-
+	vim.keymap.set('n', 'K', vim.lsp.buf.hover, merge_tables({ desc = 'Hover Documentation' }, opts))
+	vim.keymap.set('n', '<leader>r', vim.lsp.buf.rename, merge_tables({ desc = '[R]ename' }, opts))
+	vim.keymap.set('n', '<leader>fa', vim.lsp.buf.code_action, merge_tables({ desc = '[F]ind Code [A]ctions' }, opts))
+	vim.keymap.set(
+		'v',
+		'<leader>fa',
+		vim.lsp.buf.range_code_action,
+		merge_tables({ desc = '[F]ind Range Code [A]ctions' }, opts)
+	)
 	-- Add formatting keymap if supported
 	if client.supports_method 'textDocument/formatting' then
 		vim.keymap.set(
 			'n',
 			'<leader>w',
 			function() vim.lsp.buf.format { async = true } end,
-			{ noremap = true, buffer = bufnr }
+			merge_tables({ desc = 'Format Buffer' }, opts)
 		)
 	else
 		vim.keymap.set(
 			'n',
 			'<leader>w',
 			function() print 'Formating not supported for this language' end,
-			{ noremap = true, buffer = bufnr }
+			merge_tables({ desc = '[Not Supported for filetype] Format Buffer' }, opts)
 		)
 	end
-
 	-- LSP goto ...
-	vim.keymap.set('n', 'gd', vim.lsp.buf.definition, { noremap = true, buffer = bufnr })
-	vim.keymap.set('n', 'gt', vim.lsp.buf.type_definition, { noremap = true, buffer = bufnr })
-	vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, { noremap = true, buffer = bufnr })
+	vim.keymap.set('n', 'gd', vim.lsp.buf.definition, merge_tables({ desc = '[G]o to [D]efinition' }, opts))
+	vim.keymap.set('n', 'gt', vim.lsp.buf.type_definition, merge_tables({ desc = '[G]o to [T]ype Definition' }, opts))
+	vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, merge_tables({ desc = '[G]o to [I]mplementation' }, opts))
 end
 
 return {
