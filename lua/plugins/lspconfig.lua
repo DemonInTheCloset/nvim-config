@@ -11,12 +11,11 @@ local function on_attach(client, bufnr)
 	-- LSP actions
 	vim.keymap.set('n', 'K', vim.lsp.buf.hover, merge_tables({ desc = 'Hover Documentation' }, opts))
 	vim.keymap.set('n', '<leader>r', vim.lsp.buf.rename, merge_tables({ desc = '[R]ename' }, opts))
-	vim.keymap.set('n', '<leader>fa', vim.lsp.buf.code_action, merge_tables({ desc = '[F]ind Code [A]ctions' }, opts))
 	vim.keymap.set(
-		'v',
+		{ 'n', 'v' },
 		'<leader>fa',
-		vim.lsp.buf.range_code_action,
-		merge_tables({ desc = '[F]ind Range Code [A]ctions' }, opts)
+		vim.lsp.buf.code_action,
+		merge_tables({ desc = '[F]ind Code [A]ctions' }, opts)
 	)
 	-- Add formatting keymap if supported
 	if client.supports_method 'textDocument/formatting' then
