@@ -46,7 +46,6 @@ return {
 		event = { 'BufReadPre', 'BufNewFile' },
 		dependencies = {
 			'cmp',
-			'mason',
 			'mason-lspconfig',
 		},
 		config = function()
