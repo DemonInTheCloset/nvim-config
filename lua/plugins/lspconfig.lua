@@ -49,29 +49,78 @@ return {
 			'mason-lspconfig',
 		},
 		config = function()
+			-- Extra settings for lua_ls
 			local runtime_path = vim.split(package.path, ';')
 			table.insert(runtime_path, 'lua/?.lua')
 			table.insert(runtime_path, 'lua/?/init.lua')
+			local lua_settings = {
+				Lua = {
+					-- Use neovim runtime path
+					runtime = { version = 'LuaJIT', path = runtime_path },
+					-- Set neovim and AwesomeWM globals
+					diagnostics = { globals = { 'vim', 'awesome', 'screen', 'client', 'root' } },
+					workspace = { library = vim.api.nvim_get_runtime_file('', true), checkThirdParty = false },
+					telemetry = { enable = false },
+				},
+			}
+			-- Get capabilities
 			local capabilities = require('cmp_nvim_lsp').default_capabilities()
+			-- Configure servers
 			local lspconfig = require 'lspconfig'
 			lspconfig['jsonls'].setup { on_attach = on_attach, capabilities = capabilities }
 			lspconfig['ruff_lsp'].setup { on_attach = on_attach, capabilities = capabilities }
 			lspconfig['serve_d'].setup { on_attach = on_attach, capabilities = capabilities }
 			lspconfig['taplo'].setup { on_attach = on_attach, capabilities = capabilities }
 			lspconfig['typst_lsp'].setup { on_attach = on_attach, capabilities = capabilities }
-			lspconfig['lua_ls'].setup {
+			lspconfig['lua_ls'].setup { on_attach = on_attach, capabilities = capabilities, settings = lua_settings }
+			lspconfig['vimls'].setup { on_attach = on_attach, capabilities = capabilities }
+		end,
+	},
+
+	{
+		'jose-elias-alvarez/null-ls.nvim',
+		lazy = false,
+		name = 'null-ls',
+		dependencies = { 'mason', 'nvim-lua/plenary.nvim' },
+		opts = function()
+			local null_ls = require 'null-ls'
+			-- Sources
+			local code_actions = null_ls.builtins.code_actions
+			local diagnostics = null_ls.builtins.diagnostics
+			local formatting = null_ls.builtins.formatting
+			local hover = null_ls.builtins.hover
+			local completion = null_ls.builtins.completion
+			-- Settings
+			return {
+				-- Setup keybindings
 				on_attach = on_attach,
-				capabilities = capabilities,
-				settings = {
-					Lua = {
-						runtime = { version = 'LuaJIT', path = runtime_path },
-						diagnostics = { globals = { 'vim', 'awesome', 'screen', 'client', 'root' } },
-						workspace = { library = vim.api.nvim_get_runtime_file('', true), checkThirdParty = false },
-						telemetry = { enable = false },
-					},
+				sources = {
+					-- Code actions
+					code_actions.shellcheck,
+					-- Diagnostics
+					diagnostics.ruff,
+					diagnostics.shellcheck,
+					diagnostics.statix,
+					diagnostics.zsh,
+					-- Formatting
+					formatting.clang_format,
+					formatting.just,
+					formatting.nginx_beautifier,
+					formatting.nixpkgs_fmt,
+					formatting.ruff,
+					formatting.rustfmt,
+					formatting.shellharden,
+					formatting.stylua,
+					formatting.taplo,
+					formatting.trim_whitespace,
+					formatting.yamlfmt,
+					formatting.zigfmt,
+					-- Hover
+					hover.printenv,
+					-- Completion
+					completion.luasnip,
 				},
 			}
-			lspconfig['vimls'].setup { on_attach = on_attach, capabilities = capabilities }
 		end,
 	},
 
